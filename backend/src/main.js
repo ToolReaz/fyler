@@ -1,4 +1,7 @@
+// Dependencies
 const { fastify } = require("fastify");
+const fs = require("fs");
+const path = require("path");
 
 // Create HTTP server
 const server = require("fastify")({ logger: true });
@@ -29,16 +32,20 @@ server.get("/", (req, res) => {
   res.send("Hello World !");
 });
 
+// Routes
+fs.readdirSync(path.join(__dirname, "routes")).forEach((file) => {
+  require(path.join(__dirname, "routes", file))(server);
+  server.log.info("Registered routes for " + file.replace(".routes.js", ""));
+});
+
 // Database
 const { Sequelize } = require("sequelize");
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   dialect: DB_TYPE,
   host: DB_HOST,
 });
-const fs = require("fs");
-const path = require("path");
 fs.readdirSync(path.join(__dirname, "models")).forEach((file) => {
-  let name = file.replace("Model.js", "");
+  let name = file.replace("Model.js");
   sequelize.define(name, require(path.join(__dirname, "models", file)));
 });
 

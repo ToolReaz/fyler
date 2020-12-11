@@ -7,7 +7,7 @@ A simple yet efficient self hosted file sharing server !
 ## Planned features
 - Share: link, image, media, file, document
 - Optional account system
-- Password protected share link
+- Password protected links
 - File cheksum support
 - Optional admin panel
 - Link expiration

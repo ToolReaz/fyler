@@ -1,0 +1,26 @@
+{
+  "name": "fyler-backend",
+  "version": "0.0.1-alpha",
+  "description": "Fyler backend server",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToolReaz/fyler.git"
+  },
+  "keywords": [
+    "Fyler",
+    "fyler",
+    "backend",
+    "server",
+    "api"
+  ],
+  "author": "ToolReaz",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ToolReaz/fyler/issues"
+  },
+  "homepage": "https://github.com/ToolReaz/fyler#readme"
+}

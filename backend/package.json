@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/ToolReaz/fyler#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "fastify": "^3.9.1",
     "fastify-compress": "^3.4.0",
@@ -33,7 +34,8 @@
     "fastify-helmet": "^5.0.3",
     "fastify-static": "^3.3.0",
     "mariadb": "^2.5.2",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",

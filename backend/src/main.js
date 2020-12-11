@@ -32,12 +32,6 @@ server.get("/", (req, res) => {
   res.send("Hello World !");
 });
 
-// Routes
-fs.readdirSync(path.join(__dirname, "routes")).forEach((file) => {
-  require(path.join(__dirname, "routes", file))(server);
-  server.log.info("Registered routes for " + file.replace(".routes.js", ""));
-});
-
 // Database
 const { Sequelize } = require("sequelize");
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
@@ -45,17 +39,27 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
 });
 fs.readdirSync(path.join(__dirname, "models")).forEach((file) => {
-  let name = file.replace("Model.js");
-  sequelize.define(name, require(path.join(__dirname, "models", file)));
+  let name = file.replace("Model.js", "");
+  let model = require(path.join(__dirname, "models", file));
+  sequelize.define(name, model);
+});
+
+// Decorate DB
+server.decorate("db", sequelize);
+
+// Routes
+fs.readdirSync(path.join(__dirname, "routes")).forEach((file) => {
+  require(path.join(__dirname, "routes", file))(server);
+  server.log.info("Registered routes for " + file.replace(".routes.js", ""));
 });
 
 (async () => {
   try {
-    await server.listen(process.env.PORT || 3000);
-    server.log.info(`Server running !`);
-
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
+
+    await server.listen(process.env.PORT || 3000);
+    server.log.info(`Server running !`);
   } catch (e) {
     server.log.error(e);
   }

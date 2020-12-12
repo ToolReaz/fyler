@@ -8,7 +8,6 @@ module.exports = {
 
     const link = await this.db.models.Link.findOne({ where: { url } });
     if (link) {
-      console.log(link);
       if (link.dataValues.type === "redirect") {
         res.redirect(link.dataValues.target);
       } else {

@@ -58,7 +58,7 @@ fs.readdirSync(path.join(__dirname, "routes")).forEach((file) => {
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
 
-    await server.listen(process.env.PORT || 3000);
+    await server.listen(process.env.PORT || 4000);
     server.log.info(`Server running !`);
   } catch (e) {
     server.log.error(e);

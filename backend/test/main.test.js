@@ -4,7 +4,7 @@ const server = require("../src/main");
 
 describe("Server test", () => {
   afterAll(async () => {
-    await server.close();
+    await server.stop();
   });
 
   test("Respond on route GET /", async (done) => {

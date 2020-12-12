@@ -12,7 +12,8 @@ module.exports = {
       if (link.dataValues.type === "redirect") {
         res.redirect(link.dataValues.target);
       } else {
-        return "Method not implemented yet";
+        res.status(501);
+        res.send();
       }
     }
 
@@ -31,6 +32,7 @@ module.exports = {
       return { status: "success", url };
     }
 
-    return "Type not supported yet";
+    res.status(501);
+    res.send();
   },
 };

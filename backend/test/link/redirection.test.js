@@ -1,18 +1,18 @@
-const server = require("../src/main");
+const server = require("../../src/main");
 let linkId;
-
-const redirectionLinkMockup = {
-  type: "redirection",
-  url: "https://google.com/",
-};
 
 describe("Link module tests", () => {
   describe("Server test", () => {
     afterAll(async () => {
-      await server.close();
+      await server.stop();
     });
 
     test("Create redirection link: POST /l", async (done) => {
+      const redirectionLinkMockup = {
+        type: "redirection",
+        target: "https://google.com/",
+      };
+
       const response = await server.inject({
         method: "POST",
         url: "/l",
@@ -22,7 +22,8 @@ describe("Link module tests", () => {
       linkId = response.payload;
 
       expect(response.statusCode).toBe(200);
-      expect(response.payload).toBeDefined();
+      expect(response.payload.status).toBe("success");
+      expect(response.payload.url).toBeDefined();
 
       done();
     });
@@ -33,19 +34,7 @@ describe("Link module tests", () => {
         url: "/l/" + linkId,
       });
 
-      expect(response.statusCode).toBe(300);
-
-      done();
-    });
-
-    test("Image link: GET /l/:id", async (done) => {
-      const response = await server.inject({
-        method: "GET",
-        url: "/l/" + linkId,
-      });
-
       expect(response.statusCode).toBe(200);
-      expect(response.payload).toBe("Hello World !");
 
       done();
     });

@@ -65,4 +65,9 @@ fs.readdirSync(path.join(__dirname, "routes")).forEach((file) => {
   }
 })();
 
+server.stop = async () => {
+  await sequelize.close();
+  await server.close();
+};
+
 module.exports = server;

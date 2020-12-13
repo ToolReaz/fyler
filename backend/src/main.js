@@ -27,9 +27,9 @@ server.register(require("fastify-cookie"), {
 server.register(require("fastify-helmet"), {
   hidePoweredBy: { setTo: "Potatoes" },
 });
-
-server.get("/", (req, res) => {
-  res.send("Hello World !");
+fastify.register(require("fastify-static"), {
+  root: path.join(__dirname, "..", "..", "client", "build"),
+  prefix: "/",
 });
 
 // Database
@@ -55,10 +55,10 @@ fs.readdirSync(path.join(__dirname, "routes")).forEach((file) => {
 
 (async () => {
   try {
-    await sequelize.authenticate();
-    await sequelize.sync({ force: true });
+    //await sequelize.authenticate();
+    //await sequelize.sync({ force: true });
 
-    await server.listen(process.env.PORT || 4000);
+    await server.listen(process.env.PORT || 4000, "0.0.0.0");
     server.log.info(`Server running !`);
   } catch (e) {
     server.log.error(e);

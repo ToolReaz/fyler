@@ -27,7 +27,7 @@ server.register(require("fastify-cookie"), {
 server.register(require("fastify-helmet"), {
   hidePoweredBy: { setTo: "Potatoes" },
 });
-fastify.register(require("fastify-static"), {
+server.register(require("fastify-static"), {
   root: path.join(__dirname, "..", "..", "client", "build"),
   prefix: "/",
 });

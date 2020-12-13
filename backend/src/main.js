@@ -26,10 +26,7 @@ server.register(require("fastify-cookie"), {
 });
 server.register(require("fastify-helmet"), {
   hidePoweredBy: { setTo: "Potatoes" },
-});
-server.register(require("fastify-static"), {
-  root: path.join(__dirname, "..", "..", "client", "build"),
-  prefix: "/",
+  contentSecurityPolicy: false,
 });
 
 // Database
@@ -51,6 +48,10 @@ server.decorate("db", sequelize);
 fs.readdirSync(path.join(__dirname, "routes")).forEach((file) => {
   require(path.join(__dirname, "routes", file))(server);
   server.log.info("Registered routes for " + file.replace(".routes.js", ""));
+});
+server.register(require("fastify-static"), {
+  root: path.join(__dirname, "..", "..", "client", "build"),
+  prefix: "/*",
 });
 
 (async () => {

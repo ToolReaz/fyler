@@ -31,6 +31,8 @@ docker run -d --name fyler -e ... fyler
 
 ### Docker compose
 
+The simpliest way is to use the provided docker-compose.yml solution.
+
 ```bash
 git clone https://github.com/ToolReaz/fyler.git
 

@@ -1,5 +1,9 @@
 import Axios from "axios";
 
-export const API = Axios.create({
-  baseURL: "http://localhost:4000",
-});
+const config = process.env.production
+  ? null
+  : {
+      baseURL: "http://localhost:4000",
+    };
+
+export const API = Axios.create(config);

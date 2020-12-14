@@ -14,7 +14,7 @@ export default function CreateLink() {
           target: url,
         });
         setUrl("");
-        setLink("http://localhost:4000/l/" + data.url);
+        setLink(data.url);
         message.success("Lien crée !");
       } catch (e) {
         console.error(e);

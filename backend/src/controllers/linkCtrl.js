@@ -1,5 +1,7 @@
 const crypto = require("crypto");
 
+const BASE_URL = process.env.BASE_URL || "http://localhost:4000";
+
 module.exports = {
   get: async function (req, res) {
     const { url } = req.params;
@@ -21,14 +23,17 @@ module.exports = {
 
   create: async function (req, res) {
     const { type } = req.body;
-
     if (type === "redirect") {
       const { target } = req.body;
       if (!target || target === "") return "No url supplied";
 
-      const url = crypto.randomBytes(8).toString("hex");
-      const link = await this.db.models.Link.create({ type, target, url });
-      return { status: "success", url };
+      const code = crypto.randomBytes(8).toString("hex");
+      const link = await this.db.models.Link.create({
+        type,
+        target,
+        code,
+      });
+      return { status: "success", code, url: BASE_URL + "/l/" + code };
     }
 
     res.status(501);

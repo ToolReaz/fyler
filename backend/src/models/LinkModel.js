@@ -6,7 +6,7 @@ const Link = {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  url: {
+  code: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,

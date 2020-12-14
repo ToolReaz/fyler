@@ -2,15 +2,14 @@ import { Button, Card, Input, message, Typography } from "antd";
 import React, { useState } from "react";
 import { API } from "../libs/api";
 
-export default function CreateLink() {
+export default function CreateRedirectLink() {
   const [url, setUrl] = useState("");
   const [link, setLink] = useState("");
 
   const submit = async () => {
     if (url !== "") {
       try {
-        const { data } = await API.post("/l", {
-          type: "redirect",
+        const { data } = await API.post("/l/redirect", {
           target: url,
         });
         setUrl("");

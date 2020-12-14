@@ -1,4 +1,9 @@
 const crypto = require("crypto");
+const fs = require("fs");
+const path = require("path");
+const util = require("util");
+const { pipeline } = require("stream");
+const pump = util.promisify(pipeline);
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:4000";
 
@@ -8,35 +13,63 @@ module.exports = {
 
     if (!url || url === "") return "No url found";
 
-    const link = await this.db.models.Link.findOne({ where: { url } });
+    const link = await this.db.models.Link.findOne({ where: { code: url } });
     if (link) {
-      if (link.dataValues.type === "redirect") {
-        res.redirect(link.dataValues.target);
-      } else {
-        res.status(501);
-        res.send();
+      switch (link.dataValues.type) {
+        case "redirect":
+          res.redirect(link.dataValues.target);
+          break;
+        case "image":
+          res.send(fs.readFileSync(link.dataValues.target));
+          break;
+        default:
+          res.status(501);
+          res.send();
+          break;
       }
     }
 
     return "No matching url found";
   },
 
-  create: async function (req, res) {
-    const { type } = req.body;
-    if (type === "redirect") {
-      const { target } = req.body;
-      if (!target || target === "") return "No url supplied";
+  createRedirect: async function (req, res) {
+    const { Link } = this.db.models;
+    const { target, password = "" } = req.body;
 
-      const code = crypto.randomBytes(8).toString("hex");
-      const link = await this.db.models.Link.create({
-        type,
-        target,
-        code,
-      });
-      return { status: "success", code, url: BASE_URL + "/l/" + code };
+    if (!target || target === "") {
+      res.send("No url supplied");
+      return;
     }
 
-    res.status(501);
-    res.send();
+    const code = crypto.randomBytes(8).toString("hex");
+    await Link.create({
+      type: "redirect",
+      target,
+      code,
+      password,
+    });
+    res.send({ status: "success", code, url: BASE_URL + "/l/" + code });
+  },
+
+  createImage: async function (req, res) {
+    const { Link } = this.db.models;
+    const data = await req.file();
+
+    const code = crypto.randomBytes(8).toString("hex");
+    const imagePath = path.join(
+      __dirname,
+      "..",
+      "images",
+      code + "." + data.fields.ext.value
+    );
+
+    await pump(data.file, fs.createWriteStream(imagePath));
+
+    await Link.create({
+      type: "image",
+      target: imagePath,
+      code,
+    });
+    res.send({ status: "success", code, url: BASE_URL + "/l/" + code });
   },
 };

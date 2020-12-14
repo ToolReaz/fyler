@@ -19,6 +19,7 @@ const DB_TYPE = process.env.DB_TYPE || "mariadb";
 // Register middlewares
 server.register(require("fastify-compress"));
 server.register(require("fastify-cors"));
+server.register(require('fastify-multipart'))
 server.register(require("fastify-cookie"), {
   secret: "my-secret",
 });

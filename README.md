@@ -1,6 +1,6 @@
 # fyler
 
-![version](https://img.shields.io/badge/version-0.0.1--alpha-brightgreen)
+![version](https://img.shields.io/badge/version-0.0.2--alpha-brightgreen)
 
 A simple yet efficient self hosted file sharing server !
 

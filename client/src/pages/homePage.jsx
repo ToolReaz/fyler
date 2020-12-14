@@ -1,10 +1,13 @@
 import React from "react";
-import CreateLink from "../components/CreateLink";
+import CreateImageLink from "../components/CreateImageLink";
+import CreateRedirectLink from "../components/CreateRedirectLink";
 
 export default function HomePage() {
   return (
     <div style={{ margin: "0 auto" }}>
-      <CreateLink />
+      <CreateRedirectLink />
+      <hr />
+      <CreateImageLink />
     </div>
   );
 }

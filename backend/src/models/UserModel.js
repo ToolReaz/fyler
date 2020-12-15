@@ -24,7 +24,7 @@ const User = {
   },
   role: {
     type: DataTypes.STRING,
-    default: "user",
+    defaultValue: "user",
     allowNull: false,
   },
 };

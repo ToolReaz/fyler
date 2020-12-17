@@ -1,16 +1,29 @@
 import React from "react";
 import { Button, Form, Card, Input, message, Typography } from "antd";
 import { API } from "../libs/api";
+import Password from "antd/lib/input/Password";
 
 export default function Register() {
+  const [form] = Form.useForm();
+
   const onFinish = async (values) => {
-    const { data } = await API.post("/user/register", values);
-    console.log(data);
+    try {
+      if (values.password === values.checkPassword) {
+        const { data } = await API.post("/user/register", values);
+        console.log(data);
+        message.success("ergister success");
+        form.resetFields();
+      } else {
+        message.error("Passwords doesn't match");
+      }
+    } catch (e) {
+      message.error("Wrong credentials");
+    }
   };
 
   return (
-    <Card title="Login">
-      <Form onFinish={onFinish}>
+    <Card title="Register">
+      <Form layout="vertical" onFinish={onFinish}>
         <Form.Item
           label="Username"
           name="username"
@@ -36,14 +49,14 @@ export default function Register() {
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
         >
-          <Input />
+          <Input.Password />
         </Form.Item>
         <Form.Item
           label="Check password"
           name="checkPassword"
           rules={[{ required: true, message: "Please input your password!" }]}
         >
-          <Input />
+          <Input.Password />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">

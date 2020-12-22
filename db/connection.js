@@ -26,7 +26,7 @@ async function dbConnect() {
   db.define("Link", Link);
 
   await db.authenticate();
-  await db.sync({ force: true });
+  await db.sync({ force: false });
 
   connected = true;
   return db;

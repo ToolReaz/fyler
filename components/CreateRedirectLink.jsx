@@ -23,10 +23,7 @@ export default function CreateRedirectLink() {
   };
 
   return (
-    <Card
-      title="Create link"
-      style={{ margin: "0 auto", maxWidth: 400, textAlign: "center" }}
-    >
+    <div>
       <Input
         onChange={(e) => setUrl(e.target.value)}
         bordered={false}
@@ -46,6 +43,6 @@ export default function CreateRedirectLink() {
       <br />
       <br />
       <Typography.Text>{link}</Typography.Text>
-    </Card>
+    </div>
   );
 }

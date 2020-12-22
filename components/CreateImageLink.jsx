@@ -25,10 +25,7 @@ export default function CreateImageLink() {
   };
 
   return (
-    <Card
-      title="Share image"
-      style={{ margin: "0 auto", maxWidth: 400, textAlign: "center" }}
-    >
+    <div>
       <Upload.Dragger
         itemRender={null}
         multiple={false}
@@ -38,6 +35,6 @@ export default function CreateImageLink() {
       </Upload.Dragger>
       <br />
       <Typography.Text>{link}</Typography.Text>
-    </Card>
+    </div>
   );
 }

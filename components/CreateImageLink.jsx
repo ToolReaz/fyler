@@ -14,7 +14,7 @@ export default function CreateImageLink() {
       formData.append("type", "image");
       formData.append("ext", action.file.type.split("/")[1]);
 
-      const { data } = await axios.post("/l/image", formData);
+      const { data } = await axios.post("/api/l/image", formData);
 
       setLink(data.url);
       message.success("Link created !");

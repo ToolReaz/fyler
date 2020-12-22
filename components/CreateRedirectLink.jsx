@@ -9,7 +9,7 @@ export default function CreateRedirectLink() {
   const submit = async () => {
     if (url !== "") {
       try {
-        const { data } = await axios.post("/l/redirect", {
+        const { data } = await axios.post("/api/l/redirect", {
           target: url,
         });
         setUrl("");

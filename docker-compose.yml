@@ -3,21 +3,25 @@ version: "3"
 services:
   app:
     build: .
+    container_name: fyler
     restart: always
     depends_on:
       - db
     links:
       - db
     ports:
-      - 8080:4000
+      - 8080:3000
     environment:
       - DB_HOST=db
       - DB_NAME=fyler
       - DB_USER=root
       - DB_PASS=root
+      - DB_TYPE=mariadb
+      - BASE_URL=http://localhost:3000
 
   db:
     image: mariadb:latest
+    container_name: fyler_db
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root

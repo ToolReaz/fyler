@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Form, Card, Input, message, Typography } from "antd";
 import { API } from "../libs/api";
-import Password from "antd/lib/input/Password";
 
 export default function Register() {
   const [form] = Form.useForm();
@@ -11,7 +10,7 @@ export default function Register() {
       if (values.password === values.checkPassword) {
         const { data } = await API.post("/user/register", values);
         console.log(data);
-        message.success("ergister success");
+        message.success("Register success");
         form.resetFields();
       } else {
         message.error("Passwords doesn't match");

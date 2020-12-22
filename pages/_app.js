@@ -6,7 +6,6 @@ import Link from "next/link";
 const { Header, Content, Footer } = Layout;
 
 function MyApp({ Component, pageProps }) {
-  //return <Component {...pageProps} />;
 
   return (
     <Layout style={{ minHeight: "100vh" }}>

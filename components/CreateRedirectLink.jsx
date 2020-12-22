@@ -54,7 +54,7 @@ export default function CreateRedirectLink() {
         }}
       >
         <Button type="text">{link}</Button>
-      </CopyToClipboard>{" "}
+      </CopyToClipboard>
     </div>
   );
 }

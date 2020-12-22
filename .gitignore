@@ -5,3 +5,5 @@ node_modules/
 .eslintcache
 
 backend/src/images
+
+.next

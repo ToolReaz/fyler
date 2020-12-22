@@ -6,7 +6,6 @@ import Link from "next/link";
 const { Header, Content, Footer } = Layout;
 
 function MyApp({ Component, pageProps }) {
-
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Header theme="light">
@@ -19,13 +18,17 @@ function MyApp({ Component, pageProps }) {
           style={{ float: "right" }}
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={[0]}
+          defaultSelectedKeys={null}
         >
           <Menu.Item key="1">
-            <Link href="/register">S'inscrire</Link>
+            <Link href="/register">
+              <a>Register</a>
+            </Link>
           </Menu.Item>
           <Menu.Item key="2">
-            <Link href="/login"><a>Me connecter</a></Link>
+            <Link href="/login">
+              <a>Login</a>
+            </Link>
           </Menu.Item>
         </Menu>
       </Header>

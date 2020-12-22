@@ -1,4 +1,4 @@
-import dbConnect from "../../db/connection";
+import dbConnect from "../../../db/connection";
 import { compareSync } from "bcryptjs";
 
 export default async (req, res) => {

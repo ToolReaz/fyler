@@ -7,7 +7,7 @@ export default function Login() {
 
   const onFinish = async (values) => {
     try {
-      const { data } = await axios.post("/user/login", values);
+      const { data } = await axios.post("/api/auth/login", values);
       console.log(data);
       message.success("Login success");
       form.resetFields();

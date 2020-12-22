@@ -1,4 +1,4 @@
-import dbConnect from "../../db/connection";
+import dbConnect from "../../../db/connection";
 
 export default async (req, res) => {
   const db = await dbConnect();

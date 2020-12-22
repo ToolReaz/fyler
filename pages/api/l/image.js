@@ -17,7 +17,7 @@ export default async (req, res) => {
   form.keepExtensions = true;
   form.parse(req, async (err, fields, { file }) => {
     const code = randomBytes(8).toString("hex");
-    const imagePath = join("/tmp", code + "." + fields.ext.value);
+    const imagePath = join("/tmp", code + "." + fields.ext);
 
     writeFileSync(imagePath, readFileSync(file.path));
 

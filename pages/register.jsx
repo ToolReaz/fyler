@@ -8,8 +8,7 @@ export default function Register() {
   const onFinish = async (values) => {
     try {
       if (values.password === values.checkPassword) {
-        const { data } = await axios.post("/user/register", values);
-        console.log(data);
+        const { data } = await axios.post("/api/auth/register", values);
         message.success("Register success");
         form.resetFields();
       } else {

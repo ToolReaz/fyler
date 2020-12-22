@@ -1,0 +1,30 @@
+{
+  "name": "fyler",
+  "version": "0.0.1-alpha",
+  "description": "Fyler link share app.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToolReaz/fyler.git"
+  },
+  "keywords": [
+    "Fyler"
+  ],
+  "author": "ToolReaz",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ToolReaz/fyler/issues"
+  },
+  "homepage": "https://github.com/ToolReaz/fyler#readme",
+  "dependencies": {
+    "antd": "^4.9.4",
+    "axios": "^0.21.1",
+    "next": "^10.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}

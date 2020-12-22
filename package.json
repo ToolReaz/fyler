@@ -30,6 +30,7 @@
     "mariadb": "^2.5.2",
     "next": "^10.0.3",
     "react": "^17.0.1",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^17.0.1",
     "sequelize": "^6.3.5"
   }

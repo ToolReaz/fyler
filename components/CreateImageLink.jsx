@@ -1,12 +1,15 @@
-import { Card, message, Typography, Upload } from "antd";
+import { Button, Card, message, Spin, Typography, Upload } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import axios from "axios";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export default function CreateImageLink() {
   const [link, setLink] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleUpload = async (action) => {
+    setLoading(true);
     try {
       let formData = new FormData();
 
@@ -17,24 +20,35 @@ export default function CreateImageLink() {
       const { data } = await axios.post("/api/l/image", formData);
 
       setLink(data.url);
+      setLoading(false);
       message.success("Link created !");
     } catch (e) {
-      console.warn(e);
+      setLoading(false);
       message.error("Cannot create link.");
     }
   };
 
   return (
     <div>
-      <Upload.Dragger
-        itemRender={null}
-        multiple={false}
-        customRequest={handleUpload}
-      >
-        <InboxOutlined />
-      </Upload.Dragger>
+      <Spin spinning={loading}>
+        <Upload.Dragger
+          listType="picture"
+          multiple={false}
+          showUploadList={false}
+          customRequest={handleUpload}
+        >
+          <InboxOutlined />
+        </Upload.Dragger>
+      </Spin>
       <br />
-      <Typography.Text>{link}</Typography.Text>
+      <CopyToClipboard
+        text={link}
+        onCopy={() => {
+          message.success("Copied to clipboard !");
+        }}
+      >
+        <Button type="text">{link}</Button>
+      </CopyToClipboard>
     </div>
   );
 }

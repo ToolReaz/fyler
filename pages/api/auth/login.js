@@ -4,9 +4,9 @@ import { compareSync } from "bcryptjs";
 export default async (req, res) => {
   const db = await dbConnect();
 
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username || !password) {
+  if (!email || !password) {
     res.statusCode = 401;
     res.end();
     return;
@@ -14,7 +14,7 @@ export default async (req, res) => {
 
   try {
     const dataValues = await db.models.User.findAll({
-      where: { username },
+      where: { email },
     });
 
     const user = dataValues[0];

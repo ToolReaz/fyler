@@ -11,11 +11,12 @@ export default async (req, res) => {
     return;
   }
 
-  const { dataValues: user } = await db.models.User.create({
+  const user = await db.models.User.create({
     username,
     email,
     password,
   });
+  console.log(user)
 
   delete user.password;
 
@@ -23,4 +24,6 @@ export default async (req, res) => {
     status: "success",
     user,
   });
+
+  return;
 };

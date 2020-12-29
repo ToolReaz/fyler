@@ -63,7 +63,7 @@ export default function Register() {
             </Button>
           </Form.Item>
         </Form>
-      </Card>{" "}
+      </Card>
     </div>
   );
 }

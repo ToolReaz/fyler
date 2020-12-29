@@ -52,5 +52,9 @@ export default function code(props) {
       </Card>
     );
   }
-  return null;
+  return (
+    <Card style={{ margin: "0 auto", maxWidth: 400, textAlign: "center" }}>
+      <p>Link not found</p>
+    </Card>
+  );
 }

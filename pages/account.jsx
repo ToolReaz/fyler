@@ -1,5 +1,7 @@
 import React from "react";
 
-export default function account() {
+function account() {
   return <div>Account</div>;
 }
+
+export default account;

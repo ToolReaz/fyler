@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }) {
           style={{ float: "right" }}
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={null}
+          defaultSelectedKeys={[]}
         >
           <Menu.Item key="1">
             <Link href="/register">

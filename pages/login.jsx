@@ -1,17 +1,19 @@
 import React from "react";
 import { Button, Form, Card, Input, message, Typography } from "antd";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const [form] = Form.useForm();
+  const router = useRouter();
 
   const onFinish = async (values) => {
     try {
-      const { data } = await axios.post("/api/auth/login", values);
-      console.log(data);
-      message.success("Login success");
+      await axios.post("/api/auth/login", values);
       form.resetFields();
+      router.push("/account");
     } catch (e) {
+      console.error(e);
       message.error("Wrong credentials");
     }
   };
@@ -36,14 +38,14 @@ export default function Login() {
               },
             ]}
           >
-            <Input.Password />
+            <Input />
           </Form.Item>
           <Form.Item
             label="Password"
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
-            <Input />
+            <Input.Password />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">
@@ -51,7 +53,7 @@ export default function Login() {
             </Button>
           </Form.Item>
         </Form>
-      </Card>{" "}
+      </Card>
     </div>
   );
 }

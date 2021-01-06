@@ -1,5 +1,6 @@
 import Link from "./models/LinkModel";
 import User from "./models/UserModel";
+import Config from "./models/ConfigModel";
 
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
@@ -24,6 +25,7 @@ async function dbConnect() {
 
   db.define("User", User);
   db.define("Link", Link);
+  db.define("Config", Config, { tableName: "Config" });
 
   await db.authenticate();
   await db.sync({ force: false });

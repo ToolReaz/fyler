@@ -22,14 +22,17 @@ export default function settings() {
           <SettingSwitch
             title="Anonymous link"
             description="Enable non logged user to create link."
+            settingKey="enableAnonymousLink"
           />
           <SettingSwitch
             title="Redirect link"
             description="Whether or not enable the creation of redirection link."
+            settingKey="enableRedirectLink"
           />
           <SettingSwitch
             title="Image link"
             description="Whether or not enable the creation of image link."
+            settingKey="enableImageLink"
           />
         </Panel>
         <Panel key={3} header="Danger zone">

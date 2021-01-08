@@ -9,45 +9,43 @@ const { TabPane } = Tabs;
 
 export async function getStaticProps() {
   const db = await dbConnect();
-  const x = await db.models.Config.findAll({
+  const configs = await db.models.Config.findAll({
+    attributes: ["key", "value"],
     where: {
-      key: "isInit",
+      key: ["enableRedirectLink", "enableImageLink"],
     },
   });
 
-  if (x[0].dataValues.value === "1") {
-    return { props: { isInit: true } };
+  let config = {};
+  if (configs) {
+    configs.forEach((x) => {
+      config[x.dataValues.key] = x.dataValues.value;
+    });
   }
-  return { props: { isInit: false }, revalidate: 30 };
+
+  console.log(config);
+
+  return { props: { config }, revalidate: 1 };
 }
 
-export default function Home({ isInit }) {
+export default function Home({ config }) {
   return (
     <div>
       <Head>
         <title>Fyler</title>
       </Head>
-      {!isInit && (
-        <Link href="/setup">
-          <center>
-            <a>
-              It looks like it's the first time you launch Fyler !
-              <br />
-              Click here to configure the app.
-              <br />
-              <br />
-            </a>
-          </center>
-        </Link>
-      )}
       <Card style={{ margin: "0 auto", maxWidth: 400, textAlign: "center" }}>
         <Tabs>
-          <TabPane tab="Redirect" key="1">
-            <CreateRedirectLink />
-          </TabPane>
-          <TabPane tab="Image" key="2">
-            <CreateImageLink />
-          </TabPane>
+          {config.enableRedirectLink != "0" && (
+            <TabPane tab="Redirect" key="1">
+              <CreateRedirectLink />
+            </TabPane>
+          )}
+          {config.enableImageLink != "0" && (
+            <TabPane tab="Image" key="2">
+              <CreateImageLink />
+            </TabPane>
+          )}
         </Tabs>
       </Card>
     </div>

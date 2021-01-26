@@ -1,3 +1,7 @@
+| !x PROJET DROPPED 
+At the beginning this project was a playground to learn NextJS but I decided to drop it due to difficulties achieving my goals with NextJS.
+|
+
 # fyler
 
 ![version](https://img.shields.io/badge/version-0.0.2--alpha-brightgreen)

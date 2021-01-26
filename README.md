@@ -1,4 +1,4 @@
-> :warning: **PROJECT DROPPED **: At the beginning this project was a playground to learn NextJS but I decided to drop it due to difficulties achieving my goals with NextJS.
+> :warning: **PROJECT DROPPED** : At the beginning this project was a playground to learn NextJS but I decided to drop it due to difficulties achieving my goals with NextJS.
 
 # fyler
 
